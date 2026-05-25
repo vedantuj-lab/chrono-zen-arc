@@ -74,6 +74,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Aether — Digital Wellness & Focus" },
+      { name: "description", content: "Flow State is a gamified digital wellness app to reduce phone addiction and boost focus." },
+      { property: "og:description", content: "Flow State is a gamified digital wellness app to reduce phone addiction and boost focus." },
+      { name: "twitter:description", content: "Flow State is a gamified digital wellness app to reduce phone addiction and boost focus." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/62ea0193-412b-42cf-b42a-f4a84ca200e0/id-preview-60e81ff5--84070842-947c-4fa5-a952-ae44f64251b4.lovable.app-1779722681139.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/62ea0193-412b-42cf-b42a-f4a84ca200e0/id-preview-60e81ff5--84070842-947c-4fa5-a952-ae44f64251b4.lovable.app-1779722681139.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
