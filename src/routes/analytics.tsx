@@ -62,16 +62,14 @@ function AnalyticsPage() {
 
         <section className="col-span-12 glass rounded-4xl p-8">
           <h2 className="text-xl font-bold mb-6">Usage Heatmap</h2>
-          <div className="grid grid-cols-24 gap-1">
+          <div className="grid gap-1" style={{ gridTemplateColumns: "repeat(24, minmax(0, 1fr))" }}>
             {Array.from({ length: 7 * 24 }).map((_, i) => {
               const v = (Math.sin(i * 0.7) + 1) / 2;
               return (
                 <div
                   key={i}
                   className="aspect-square rounded-sm"
-                  style={{
-                    background: `oklch(0.78 0.15 200 / ${0.08 + v * 0.6})`,
-                  }}
+                  style={{ background: `oklch(0.78 0.15 200 / ${0.08 + v * 0.6})` }}
                 />
               );
             })}
