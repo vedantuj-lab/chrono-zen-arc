@@ -9,24 +9,21 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { AppSidebar, MobileNav, UpgradeBadge } from "@/components/AppSidebar";
+import { AICoachFAB } from "@/components/AICoachFAB";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+      <div className="max-w-md text-center glass rounded-4xl p-10">
+        <h1 className="text-7xl font-bold">404</h1>
+        <p className="mt-2 text-sm text-muted-foreground">This page drifted into the ether.</p>
+        <Link
+          to="/"
+          className="mt-6 inline-flex items-center justify-center rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:brightness-110 transition"
+        >
+          Return to dashboard
+        </Link>
       </div>
     </div>
   );
@@ -35,31 +32,23 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
+      <div className="max-w-md text-center glass rounded-4xl p-10">
+        <h1 className="text-xl font-semibold">Something glitched</h1>
+        <p className="mt-2 text-sm text-muted-foreground">Take a breath and try again.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground"
           >
             Try again
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
+          <a href="/" className="rounded-2xl border border-border px-5 py-3 text-sm font-semibold">
+            Home
           </a>
         </div>
       </div>
@@ -72,19 +61,27 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Aether — Digital Wellness & Focus" },
+      {
+        name: "description",
+        content:
+          "Aether is a futuristic digital wellness app for focus sessions, screen-time control, gamified habits, and AI-powered coaching.",
+      },
+      { property: "og:title", content: "Aether — Digital Wellness & Focus" },
+      {
+        property: "og:description",
+        content: "Reduce screen time, build streaks, grow your focus garden.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap",
       },
     ],
   }),
@@ -110,10 +107,24 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <div className="min-h-screen relative">
+        {/* Aurora background blobs */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+          <div className="absolute top-[-15%] left-[-10%] w-[45%] h-[45%] rounded-full bg-electric/15 blur-[140px]" />
+          <div className="absolute bottom-[-15%] right-[-10%] w-[55%] h-[55%] rounded-full bg-luxe/15 blur-[160px]" />
+          <div className="absolute top-1/3 right-1/4 w-[25%] h-[25%] rounded-full bg-primary/10 blur-[120px]" />
+        </div>
+
+        <AppSidebar />
+        <UpgradeBadge />
+        <main className="md:pl-28 px-4 md:px-10 pb-28 md:pb-12 pt-6 md:pt-10 max-w-[1440px] mx-auto">
+          <Outlet />
+        </main>
+        <MobileNav />
+        <AICoachFAB />
+      </div>
     </QueryClientProvider>
   );
 }
